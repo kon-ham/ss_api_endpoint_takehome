@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_04_221518) do
+ActiveRecord::Schema.define(version: 2021_10_04_225340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_10_04_221518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "assessment_type", default: "event"
+    t.bigint "player_id"
+    t.index ["player_id"], name: "index_assessments_on_player_id"
     t.index ["user_id"], name: "index_assessments_on_user_id"
   end
 
@@ -33,6 +35,29 @@ ActiveRecord::Schema.define(version: 2021_10_04_221518) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
+  create_table "players", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "height"
+    t.integer "weight"
+    t.string "birthday"
+    t.integer "graduation_year"
+    t.string "position"
+    t.boolean "recruit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "team_id"
+    t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.string "age_group"
+    t.string "coach"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -40,7 +65,9 @@ ActiveRecord::Schema.define(version: 2021_10_04_221518) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "assessments", "players"
   add_foreign_key "assessments", "users"
   add_foreign_key "notes", "assessments"
   add_foreign_key "notes", "users"
+  add_foreign_key "players", "teams"
 end

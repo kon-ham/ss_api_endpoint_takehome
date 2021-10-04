@@ -4,5 +4,6 @@ RSpec.describe Assessment, type: :model do
   describe 'validations' do
     it { should belong_to(:user) }
     it { should have_many(:notes) }
+    it { should belong_to(:player) }
   end
 end
