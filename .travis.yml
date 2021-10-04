@@ -1,13 +1,13 @@
 language: ruby
-rvm:
-- 2.0.0
-- 1.9.3
-- jruby-19mode
-- rbx-2
+rbenv:
+  - 2.7.2
 services:
   - postgresql
-script:
-  — bundle install — jobs=3 — retry=3
-  — bundle exec rake db:create
-  — bundle exec rake db:migrate
-  — bundle exec rspec
+before_install:
+  - gem install bundler -v '2.2.28'
+before_script:
+  - bundle install
+  - bundle exec rails db:create
+  - bundle exec rails db:migrate
+script: 
+  - bundle exec rspec
