@@ -4,7 +4,7 @@ class CreateTournaments < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :city
       t.string :state
-      t.string :state_date
+      t.date :state_date
 
       t.timestamps
     end
