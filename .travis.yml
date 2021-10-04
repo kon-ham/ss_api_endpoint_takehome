@@ -5,7 +5,7 @@ services:
   - postgresql
 before_script:
   - bundle install
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
+  - bundle exec db:create
+  - bundle exec db:migrate
 script: 
   - bundle exec rspec
