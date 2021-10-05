@@ -14,10 +14,10 @@ RSpec.describe 'User Login' do
     end
 
     describe 'POST /login' do
-        it 'the /login exists' do
+        it 'the /login endpoint exists' do
             post '/api/v0/login', params: @body
             expect(response).to be_successful
-            expect(response.status).to eq(200)
+            expect(response.status).to eq(204)
         end
     end
 end
