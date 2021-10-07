@@ -28,7 +28,8 @@ RSpec.describe 'Assessments' do
 
     describe 'Happy Path - POST /assessments' do
         it 'can reach the /assessments endpoint' do
-            post '/api/v0/assessments', headers: @headers
+            post '/api/v0/assessments', headers: @headers, params: @body
+
             expect(response).to be_successful
             expect(response.status).to eq(200)
         end
