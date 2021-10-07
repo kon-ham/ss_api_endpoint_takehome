@@ -6,7 +6,7 @@ class Api::V0::UsersController < ApplicationController
             token = encode_token({user_id: @user.id})
             render json: { auth_token: token, message: 'user authenticated' }
         else
-            render json: {error: "Invalid user credentials"}
+            render json: { error: "Invalid user credentials" }, status: :unauthorized
         end
     end
 
