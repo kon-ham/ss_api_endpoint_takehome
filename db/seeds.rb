@@ -36,3 +36,4 @@ Player.create!(
     recruit: true,
     team_id: team1.id
 )
+

@@ -2,8 +2,5 @@ class NoteSerializer
   include JSONAPI::Serializer
   set_type :assessment_note
   set_id :user_id
-  attributes :note
-
-  belongs_to :assessment
-  belongs_to :user
+  attributes :note, :user_id, :assessment_id, :created_at, :updated_at
 end
