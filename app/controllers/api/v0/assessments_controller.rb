@@ -9,39 +9,15 @@ class Api::V0::AssessmentsController < ApplicationController
             player_id: attributes[:player_id],
             assessment_type: params[:type]
         )
-        note = assessment.notes.create(
+        assessment.notes.create(
             user_id: @user.id,
             note: attributes["assessment_notes_attributes"].last["note"]
         )
 
         if params.include?("include")
-            render json: { 
-                id: assessment.id, 
-                type: assessment.assessment_type,
-                attributes: assessment.attributes,
-                relationships: {
-                    assessment_notes: {
-                        data: [
-                            {
-                                id: note.id,
-                            }
-                        ]
-                    }
-                }
-            },
-            status: 200
+            render json: AssessmentSerializer.new(assessment), status: 200
         elsif params.include?("include") == false
-            render json: { 
-                id: assessment.id, 
-                type: assessment.assessment_type,
-                attributes: assessment.attributes.to_json,
-                relationships: {
-                    assessment_notes: {
-                        data: assessment.id
-                    }
-                }
-            }, 
-            status: 200
+            render json: AssessmentSerializer.new(assessment), status: 200
         end
     end
 
