@@ -6,6 +6,12 @@ RSpec.describe 'Assessments' do
         post '/api/v0/login', params: { email: @user.email, password: @user.password }
         json_object = JSON.parse(response.body, {:symbolize_names => true} )
 
+        @tournament = FactoryBot.create(:tournament)
+
+        @team = FactoryBot.create(:team, tournament: @tournament)
+
+        @player = FactoryBot.create(:player, team: @team)
+
         @headers = {
             'Authorization': json_object[:auth_token]
         }
@@ -14,8 +20,8 @@ RSpec.describe 'Assessments' do
             "type": "assessments",
             "attributes": {
                 "rating": 5,
-                "player_id": 1,
-                "tournament_id": 1,
+                "player_id": @player.id,
+                "tournament_id": @tournament.id,
                 "assessment_type": "tournament",
                     "assessment_notes_attributes": [
                         {
@@ -28,7 +34,7 @@ RSpec.describe 'Assessments' do
 
     describe 'Happy Path - POST /assessments' do
         it 'can reach the /assessments endpoint' do
-            post '/api/v0/assessments', headers: @headers, params: @body
+            post '/api/v0/assessments', headers: @headers, params: {include: true, body: @body}
 
             expect(response).to be_successful
             expect(response.status).to eq(200)
