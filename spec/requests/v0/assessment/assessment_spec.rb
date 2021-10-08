@@ -12,17 +12,19 @@ RSpec.describe 'Assessments' do
             'Authorization': json_object[:auth_token]
         }
         @body = {
-        "type": "assessments",
-        "attributes": {
-            "rating": 5,
-            "player_id": @player.id,
-            "tournament_id": @tournament.id,
-            "assessment_type": "tournament",
-                "assessment_notes_attributes": [
-                    {
-                        "note": "assessment one text"
-                    }
-                ]
+        "data": {
+            "type": "assessments",
+            "attributes": {
+                "rating": 5,
+                "player_id": @player.id,
+                "tournament_id": @tournament.id,
+                "assessment_type": "tournament",
+                    "assessment_notes_attributes": [
+                        {
+                            "note": "assessment one text"
+                        }
+                    ]
+                }
             },
         "include": "notes"
         }
@@ -57,19 +59,21 @@ RSpec.describe 'Assessments' do
 
         it 'can reach the /assessments endpoint without include param' do
             body = {
-            "type": "assessments",
-            "attributes": {
-                "rating": 5,
-                "player_id": @player.id,
-                "tournament_id": @tournament.id,
-                "assessment_type": "tournament",
-                    "assessment_notes_attributes": [
-                        {
-                            "note": "assessment one text"
-                        }
-                    ]
-                },
-            }
+                "data": {
+                    "type": "assessments",
+                    "attributes": {
+                        "rating": 5,
+                        "player_id": @player.id,
+                        "tournament_id": @tournament.id,
+                        "assessment_type": "tournament",
+                            "assessment_notes_attributes": [
+                                {
+                                    "note": "assessment one text"
+                                }
+                            ]
+                        },
+                    }
+                }
             post '/api/v0/assessments', headers: @headers, params: body
             json_response = JSON.parse(response.body, symbolize_names: true)
 
