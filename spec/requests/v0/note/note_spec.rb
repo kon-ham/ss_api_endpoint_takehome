@@ -47,4 +47,44 @@ RSpec.describe 'Players' do
             expect(json_response[:data][:attributes]).to have_key(:updated_at)
         end
     end
+
+    describe 'Happy Path - PATCH /notes' do
+        it 'can successfully reach the PATCH /notes endpoint and update a note' do
+            # recreating the POST route to simulate POST and PATCH of a note in a
+            # single block code
+            before_patch_body = {
+                "type": "assessment_notes",
+                "attributes": {
+                    "note": "Slytherine Seeker. Father was once a Death Eater.",
+                    "assessment_id": @assessment.id
+                }
+            }
+            # now a new note should have been created
+            post '/api/v0/notes', headers: @headers, params: before_patch_body
+
+            json_response = JSON.parse(response.body, symbolize_names: true)
+
+            #grabbing note_id from the POST note
+            note_id = json_response[:data][:id]
+
+            expect(json_response[:data][:attributes]).to have_key(:note)
+            expect(json_response[:data][:attributes][:note]).to eq("Slytherine Seeker. Father was once a Death Eater.")
+
+            # this is where we now test for PATCH capability
+            after_patch_body = {
+                "type": "assessment_notes",
+                "attributes": {
+                    "note": "Gryffindor Seeker. The Boy Who Lived",
+                    "assessment_id": @assessment.id
+                }
+            }
+
+            patch "/api/v0/notes/#{note_id}", headers: @headers, params: after_patch_body
+
+            # overwriting json_response variable to reflect the PATCH data change
+            json_response = JSON.parse(response.body, symbolize_names: true)
+
+            expect(response).to be_successful
+        end
+    end
 end
