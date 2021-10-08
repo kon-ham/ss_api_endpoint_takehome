@@ -51,7 +51,7 @@ RSpec.describe 'Players' do
     describe 'Happy Path - PATCH /notes' do
         it 'can successfully reach the PATCH /notes endpoint and update a note' do
             # recreating the POST route to simulate POST and PATCH of a note in a
-            # single block code
+            # single block
             before_patch_body = {
                 "type": "assessment_notes",
                 "attributes": {
@@ -67,6 +67,7 @@ RSpec.describe 'Players' do
             #grabbing note_id from the POST note
             note_id = json_response[:data][:id]
 
+            # ensure that my data is still the same
             expect(json_response[:data][:attributes]).to have_key(:note)
             expect(json_response[:data][:attributes][:note]).to eq("Slytherine Seeker. Father was once a Death Eater.")
 
@@ -85,6 +86,22 @@ RSpec.describe 'Players' do
             json_response = JSON.parse(response.body, symbolize_names: true)
 
             expect(response).to be_successful
+            expect(response.status).to eq(200)
+            expect(json_response.count).to eq(1)
+            expect(json_response).to have_key(:data)
+            expect(json_response[:data].count).to eq(3)
+            expect(json_response[:data]).to have_key(:id)
+            expect(json_response[:data]).to have_key(:type)
+            expect(json_response[:data]).to have_key(:id)
+            expect(json_response[:data][:attributes].count).to eq(5)
+            expect(json_response[:data][:attributes]).to have_key(:note)
+
+            # data has changed for this note
+            expect(json_response[:data][:attributes][:note]).to eq("Gryffindor Seeker. The Boy Who Lived")
+            expect(json_response[:data][:attributes]).to have_key(:user_id)
+            expect(json_response[:data][:attributes]).to have_key(:assessment_id)
+            expect(json_response[:data][:attributes]).to have_key(:created_at)
+            expect(json_response[:data][:attributes]).to have_key(:updated_at)
         end
     end
 end
