@@ -81,7 +81,7 @@ RSpec.describe 'Players' do
 
             get "/api/v0/players/#{@player.id}", headers: @headers, params: { include: "notes" }
 
-            json_response = JSON.parse(response.body, symbolize_names: true)
+            # json_response = JSON.parse(response.body, symbolize_names: true)
             # expect(response).to be_successful
             # expect(response.status).to eq(200)
             # expect(json_response).to have_key(:data)
@@ -98,6 +98,15 @@ RSpec.describe 'Players' do
             # expect(json_response[:data][:attributes]).to have_key(:graduation_year)
             # expect(json_response[:data][:attributes]).to have_key(:position)
             # expect(json_response[:data][:attributes]).to have_key(:recruit)
+        end
+    end
+
+    describe 'Sad Path - GET /players/{:player_id}' do
+        it 'can return an error message for a player that does not exist' do
+            get "/api/v0/players/9000", headers: @headers
+
+            expect(response).to_not be_successful
+            expect(response.status).to eq(404)
         end
     end
 end
