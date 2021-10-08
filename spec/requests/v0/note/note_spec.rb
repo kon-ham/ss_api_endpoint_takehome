@@ -104,4 +104,38 @@ RSpec.describe 'Players' do
             expect(json_response[:data][:attributes]).to have_key(:updated_at)
         end
     end
+
+    describe 'Happy Path - DELETE /notes/{:note_id}' do
+        it 'can successfully reach the endpoint and delete a given note' do
+            # recreating the POST route to simulate POST and DELETE of a note in a
+            # single block
+            before_delete_body = {
+                "type": "assessment_notes",
+                "attributes": {
+                    "note": "Slytherine Seeker. Father was once a Death Eater.",
+                    "assessment_id": @assessment.id
+                }
+            }
+            # now a new note should have been created
+            post '/api/v0/notes', headers: @headers, params: before_delete_body
+
+            # testing that we have one note in our assessment
+            expect(@assessment.notes.all.count).to eq(1)
+            json_response = JSON.parse(response.body, symbolize_names: true)
+
+            #grabbing note_id from the POST note
+            note_id = json_response[:data][:id]
+
+            delete "/api/v0/notes/#{note_id}", headers: @headers
+
+            # overwriting json_response variable to reflect the PATCH data change
+            json_response = JSON.parse(response.body, symbolize_names: true)
+
+            expect(response).to be_successful
+            expect(json_response[:data][:message]).to eq("assessment note deleted")
+
+            # now testing that we have zero notes
+            expect(@assessment.notes.all.count).to eq(0)
+        end
+    end
 end
