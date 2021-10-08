@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       get "auto_login", to: "users#auto_login"
 
       resources :assessments, only: [:show, :create, :destroy]
-      resources :players, only: [:index]
+      resources :players, only: [:index, :show]
     end
   end
 end

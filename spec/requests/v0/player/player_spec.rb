@@ -39,4 +39,13 @@ RSpec.describe 'Players' do
             expect(json_response[:data].last[:attributes]).to have_key(:recruit)
         end
     end
+
+    describe 'Happy Path - GET /players/{:player_id}' do
+        it 'can reach the GET /playres/{:player_id} and return a specific player' do
+            get "/api/v0/player/#{@player.id}"
+
+            expect(response).to be_successful
+            expect(response.status).to eq(200)
+        end
+    end
 end
