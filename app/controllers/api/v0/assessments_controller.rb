@@ -30,6 +30,17 @@ class Api::V0::AssessmentsController < ApplicationController
         end
     end
 
+    def destroy
+        assessment = Assessment.find(params[:id])
+        assessment.destroy
+        render json: { "data": {
+                            message: 'assessment and notes deleted'
+            }
+        }
+    rescue
+        render json: 'Assessment not found'
+    end
+
     private
     def assessment_params
         params.permit(:assessment).require(:user_id, :tournament_id, :player_id)
