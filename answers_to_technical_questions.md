@@ -3,11 +3,10 @@
 1) How long did you spend on the code challenge? What would you add to your solution if you had more time? If you didn't spend much time on the code challenge then use this as an opportunity to explain what you would add.
 
 	I spent about 3.5 days on this code challenge. If given more time, I would build out the rest of the API endpoints, refactor code, include strong params for each controller, and rethink my DB schema to see if I can't reflect better relationships with scale in mind. 
-  
+
 2) What was the most useful feature that was added to the latest version of a language you used? Please include a snippet of code that shows how you've used it.
 
 	N/A - Spoke with point of contact concerning this question.
-  
 
 3) How would you track down a performance issue in production? Have you ever had to do this?
 
