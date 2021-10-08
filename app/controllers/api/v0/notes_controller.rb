@@ -13,7 +13,6 @@ class Api::V0::NotesController < ApplicationController
 
     def update
         note = Note.find(params[:id])
-        binding.pry
         note.update(note: params[:data][:attributes][:note])
         render json: NoteSerializer.new(note), status: :ok
     end

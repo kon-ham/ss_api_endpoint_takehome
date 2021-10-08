@@ -21,12 +21,15 @@ RSpec.describe 'Notes' do
     describe 'Happy Path - POST /notes' do
         it 'can successfully reach the POST /notes endpoint and create a note' do
             body = {
-                "type": "assessment_notes",
-                "attributes": {
-                    "note": "Slytherine Seeker. Father was once a Death Eater.",
-                    "assessment_id": @assessment.id
+                "data": {
+                    "type": "assessment_notes",
+                    "attributes": {
+                        "note": "Slytherine Seeker. Father was once a Death Eater.",
+                        "assessment_id": @assessment.id
+                    }
                 }
             }
+            
             post '/api/v0/notes', headers: @headers, params: body
 
             json_response = JSON.parse(response.body, symbolize_names: true)
@@ -53,12 +56,15 @@ RSpec.describe 'Notes' do
             # recreating the POST route to simulate POST and PATCH of a note in a
             # single block
             before_patch_body = {
-                "type": "assessment_notes",
-                "attributes": {
-                    "note": "Slytherine Seeker. Father was once a Death Eater.",
-                    "assessment_id": @assessment.id
+                "data": {
+                    "type": "assessment_notes",
+                    "attributes": {
+                        "note": "Slytherine Seeker. Father was once a Death Eater.",
+                        "assessment_id": @assessment.id
+                    }
                 }
             }
+
             # now a new note should have been created
             post '/api/v0/notes', headers: @headers, params: before_patch_body
 
@@ -73,10 +79,12 @@ RSpec.describe 'Notes' do
 
             # this is where we now test for PATCH capability
             after_patch_body = {
-                "type": "assessment_notes",
-                "attributes": {
-                    "note": "Gryffindor Seeker. The Boy Who Lived",
-                    "assessment_id": @assessment.id
+                "data": {
+                    "type": "assessment_notes",
+                    "attributes": {
+                        "note": "Gryffindor Seeker. The Boy Who Lived",
+                        "assessment_id": @assessment.id
+                    }
                 }
             }
 
@@ -110,10 +118,12 @@ RSpec.describe 'Notes' do
             # recreating the POST route to simulate POST and DELETE of a note in a
             # single block
             before_delete_body = {
-                "type": "assessment_notes",
-                "attributes": {
-                    "note": "Slytherine Seeker. Father was once a Death Eater.",
-                    "assessment_id": @assessment.id
+                "data": {
+                    "type": "assessment_notes",
+                    "attributes": {
+                        "note": "Slytherine Seeker. Father was once a Death Eater.",
+                        "assessment_id": @assessment.id
+                    }
                 }
             }
             # now a new note should have been created
