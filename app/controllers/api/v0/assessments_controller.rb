@@ -32,7 +32,6 @@ class Api::V0::AssessmentsController < ApplicationController
 
     def destroy
         assessment = Assessment.find(params[:id])
-        binding.pry
         assessment.destroy
         render json: { "data": { message: 'assessment and notes deleted' } }
     rescue
