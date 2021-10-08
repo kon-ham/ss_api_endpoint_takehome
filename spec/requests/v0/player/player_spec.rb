@@ -41,7 +41,7 @@ RSpec.describe 'Players' do
     end
 
     describe 'Happy Path - GET /players/{:player_id}' do
-        it 'can reach the GET /players/{:player_id} and return a specific player' do
+        it 'can successfully GET /players/{:player_id} and return a specific player' do
             get "/api/v0/players/#{@player.id}", headers: @headers
 
             json_response = JSON.parse(response.body, symbolize_names: true)
@@ -64,7 +64,7 @@ RSpec.describe 'Players' do
             expect(json_response[:data][:attributes]).to have_key(:recruit)
         end
 
-        it 'can reach the GET /players/{:player_id} and return a specific player w/ params include: notes' do
+        it 'can successfully GET /players/{:player_id} and return a specific player w/ params include: notes' do
             # I created this test in order to verify my params query works for include either
             # assessment notes or notes, but they are both failing - I'm able to serialize
             # Player but I'm currently unable to add the include feature due to lack of 
