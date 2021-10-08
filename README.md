@@ -29,7 +29,7 @@ RSpec testing suite is utilized for testing this application.
  - Run the RSpec suite to ensure everything is passing as expected
 `bundle exec rspec`
 ## DB Schema
-![Find My City Schema](https://github.com/kon-ham/ss_api_endpoint_takehome/blob/main/Screen%20Shot%202021-10-04%20at%209.48.54%20PM.png?raw=true)
+![Find My City Schema](https://github.com/kon-ham/ss_api_endpoint_takehome/blob/main/db_schema_diagram.png?raw=true)
 
 ## API Endpoints
  Please see the `api_calls_responses.md` file located in the `root` directory of this repository for API endpoints and responses.
