@@ -20,7 +20,7 @@ RSpec.describe 'Teams' do
 
     describe 'Happy Path - GET /teams/{:team_id}' do
         it 'can successfully reach the GET /teams/{:team_id} with include players params' do
-            get "/teams/#{@team.id}", headers: @header, params: { include: "players" }
+            get "/api/v0/teams/#{@team.id}", headers: @header, params: { include: "players" }
 
             expect(response).to be_successful
         end
