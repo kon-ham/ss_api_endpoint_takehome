@@ -22,6 +22,6 @@ class Api::V0::NotesController < ApplicationController
         note.destroy
         render json: { "data": { "message": "assessment note deleted" } }
     rescue
-        render json: { message: "Note not found" }
+        render json: { message: "Note not found" }, status: :not_found
     end
 end
