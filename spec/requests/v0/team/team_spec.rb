@@ -20,7 +20,6 @@ RSpec.describe 'Teams' do
 
     describe 'Happy Path - GET /teams/{:team_id}' do
         it 'can successfully reach the GET /teams/{:team_id} with include players params' do
-            get "api/v0/"
         end
     end
 end
