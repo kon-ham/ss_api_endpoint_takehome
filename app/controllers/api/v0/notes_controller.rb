@@ -1,6 +1,6 @@
 class Api::V0::NotesController < ApplicationController
     before_action :authorized
-    
+
     def create
         attributes = params[:attributes]
         assessment = Assessment.find(attributes[:assessment_id])
@@ -8,6 +8,12 @@ class Api::V0::NotesController < ApplicationController
             user_id: @user.id,
             note: attributes[:note]
         )
+        render json: NoteSerializer.new(note), status: :ok
+    end
+
+    def update
+        note = Note.find(params[:id])
+        note.update(note: params[:attributes][:note])
         render json: NoteSerializer.new(note), status: :ok
     end
 end
