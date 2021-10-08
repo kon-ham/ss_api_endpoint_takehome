@@ -12,7 +12,7 @@ class Api::V0::AssessmentsController < ApplicationController
     end
 
     def create
-        attributes = params[:attributes]
+        attributes = params[:data][:attributes]
         assessment = @user.assessments.create!(
             rating: attributes[:rating],
             tournament_id: attributes[:tournament_id],
@@ -32,6 +32,7 @@ class Api::V0::AssessmentsController < ApplicationController
 
     def destroy
         assessment = Assessment.find(params[:id])
+        binding.pry
         assessment.destroy
         render json: { "data": { message: 'assessment and notes deleted' } }
     rescue
