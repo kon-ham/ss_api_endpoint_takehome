@@ -105,6 +105,8 @@ GEM
     json (2.5.1)
     json (2.5.1-java)
     json_pure (2.5.1)
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
     jwt (2.3.0)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -269,6 +271,7 @@ DEPENDENCIES
   byebug
   factory_bot_rails
   faker
+  jsonapi-serializer
   jwt
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)

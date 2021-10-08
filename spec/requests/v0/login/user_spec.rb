@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User Login' do
-    before :all do
+    before :each do
         @user = User.create(email: 'johnnyappleseed@seed.com', password: "lmaolol")
     end
     describe 'Happy Path - POST /login' do

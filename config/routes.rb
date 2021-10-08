@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     namespace :v0 do
       post "/login", to: "users#login"
       get "auto_login", to: "users#auto_login"
+
+      resources :assessments, only: [:show, :create, :destroy]
     end
   end
 end
