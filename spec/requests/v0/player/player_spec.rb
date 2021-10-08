@@ -23,11 +23,13 @@ RSpec.describe 'Players' do
 
             expect(response).to be_successful
             expect(response.status).to eq(200)
+
             expect(json_response).to have_key(:data)
             expect(json_response[:data].last.count).to eq(3)
             expect(json_response[:data].last).to have_key(:id)
             expect(json_response[:data].last).to have_key(:type)
             expect(json_response[:data].last).to have_key(:attributes)
+
             expect(json_response[:data].last[:attributes].count).to eq(8)
             expect(json_response[:data].last[:attributes]).to have_key(:first_name)
             expect(json_response[:data].last[:attributes]).to have_key(:last_name)
@@ -48,11 +50,13 @@ RSpec.describe 'Players' do
 
             expect(response).to be_successful
             expect(response.status).to eq(200)
+
             expect(json_response).to have_key(:data)
             expect(json_response[:data].count).to eq(3)
             expect(json_response[:data]).to have_key(:id)
             expect(json_response[:data]).to have_key(:type)
             expect(json_response[:data]).to have_key(:attributes)
+
             expect(json_response[:data][:attributes].count).to eq(8)
             expect(json_response[:data][:attributes]).to have_key(:first_name)
             expect(json_response[:data][:attributes]).to have_key(:last_name)
@@ -66,8 +70,8 @@ RSpec.describe 'Players' do
 
         it 'can successfully GET /players/{:player_id} and return a specific player w/ params include: notes' do
             # I created this test in order to verify my params query works for include either
-            # assessment notes or notes, but they are both failing - I'm able to serialize
-            # Player but I'm currently unable to add the include feature due to lack of 
+            # assessment notes or notes params, but they are both failing - I'm able to serialize
+            # Player but I'm currently unable to add the include feature due to my own lack of 
             # understanding how JSONAPI::Serializer works in conjunction with my models
             assessment = @player.assessments.create!(
                 rating: 9,
