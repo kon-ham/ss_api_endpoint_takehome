@@ -24,7 +24,7 @@ RSpec.describe 'Assessments' do
                         }
                     ]
                 },
-            "include": nil
+            "include": "notes"
             }
     end
 
@@ -97,7 +97,7 @@ RSpec.describe 'Assessments' do
                 tournament_id: @tournament.id,
                 player_id: @player.id
             )
-            get "/api/v0/assessments/#{assessment.id}", headers: @headers, params: { include: nil }
+            get "/api/v0/assessments/#{assessment.id}", headers: @headers, params: { include: "notes" }
             json_response = JSON.parse(response.body, symbolize_names: true)
             
             expect(response).to be_successful

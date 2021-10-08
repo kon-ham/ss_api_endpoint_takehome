@@ -63,5 +63,41 @@ RSpec.describe 'Players' do
             expect(json_response[:data][:attributes]).to have_key(:position)
             expect(json_response[:data][:attributes]).to have_key(:recruit)
         end
+
+        it 'can reach the GET /players/{:player_id} and return a specific player w/ params include: notes' do
+            # I created this test in order to verify my params query works for include either
+            # assessment notes or notes, but they are both failing - I'm able to serialize
+            # Player but I'm currently unable to add the include feature
+            assessment = @player.assessments.create!(
+                rating: 9,
+                user_id: @user.id,
+                tournament_id: @tournament.id,
+            )
+
+            assessment.notes.create!(
+                user_id: @user.id,
+                note: "HERE WE GO!!!",
+            )
+
+            get "/api/v0/players/#{@player.id}", headers: @headers, params: { include: "notes" }
+
+            json_response = JSON.parse(response.body, symbolize_names: true)
+            # expect(response).to be_successful
+            # expect(response.status).to eq(200)
+            # expect(json_response).to have_key(:data)
+            # expect(json_response[:data].count).to eq(3)
+            # expect(json_response[:data]).to have_key(:id)
+            # expect(json_response[:data]).to have_key(:type)
+            # expect(json_response[:data]).to have_key(:attributes)
+            # expect(json_response[:data][:attributes].count).to eq(8)
+            # expect(json_response[:data][:attributes]).to have_key(:first_name)
+            # expect(json_response[:data][:attributes]).to have_key(:last_name)
+            # expect(json_response[:data][:attributes]).to have_key(:height)
+            # expect(json_response[:data][:attributes]).to have_key(:weight)
+            # expect(json_response[:data][:attributes]).to have_key(:birthday)
+            # expect(json_response[:data][:attributes]).to have_key(:graduation_year)
+            # expect(json_response[:data][:attributes]).to have_key(:position)
+            # expect(json_response[:data][:attributes]).to have_key(:recruit)
+        end
     end
 end

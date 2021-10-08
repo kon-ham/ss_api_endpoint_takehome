@@ -3,10 +3,10 @@ class Api::V0::AssessmentsController < ApplicationController
 
     def show
         assessment = Assessment.find(params[:id])
-        if params.include?("include")
+        if params[:include] == 'notes'
             render json: AssessmentSerializer.new(assessment, include: ['notes']),
             status: 200
-        elsif params.include?("include") == false
+        else
             render json: AssessmentSerializer.new(assessment), status: 200
         end
     end
@@ -22,10 +22,10 @@ class Api::V0::AssessmentsController < ApplicationController
             user_id: @user.id,
             note: attributes["assessment_notes_attributes"].last["note"]
         )
-        if params.include?("include")
+        if params[:include] == 'notes'
             render json: AssessmentSerializer.new(assessment, include: ['notes']),
             status: 200
-        elsif params.include?("include") == false
+        else
             render json: AssessmentSerializer.new(assessment), status: 200
         end
     end
@@ -33,10 +33,7 @@ class Api::V0::AssessmentsController < ApplicationController
     def destroy
         assessment = Assessment.find(params[:id])
         assessment.destroy
-        render json: { "data": {
-                            message: 'assessment and notes deleted'
-            }
-        }
+        render json: { "data": { message: 'assessment and notes deleted' } }
     rescue
         render json: 'Assessment not found'
     end

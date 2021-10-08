@@ -3,12 +3,23 @@ class Api::V0::PlayersController < ApplicationController
 
     def index
         players = Player.all
-        render json: PlayerSerializer.new(players)
+        render json: PlayerSerializer.new(players),
+        status: 200
     end
 
     def show
         player = Player.find(params[:id])
-        render json: PlayerSerializer.new(player)
+        # params[:include] for both assessments and notes currently fails
+        if params[:include] == "assessments"
+            render json: PlayerSerializer.new(player, include: ['assessments']),
+            status: 200
+        elsif params[:include] == "notes"
+            render json: PlayerSerializer.new(player, include: ['notes']),
+            status: 200
+        else
+            render json: PlayerSerializer.new(player),
+            status: 200
+        end
     rescue
         render json: { message: 'Invalid player request' }, status: 404
     end
