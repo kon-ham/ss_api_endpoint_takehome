@@ -67,7 +67,8 @@ RSpec.describe 'Players' do
         it 'can reach the GET /players/{:player_id} and return a specific player w/ params include: notes' do
             # I created this test in order to verify my params query works for include either
             # assessment notes or notes, but they are both failing - I'm able to serialize
-            # Player but I'm currently unable to add the include feature
+            # Player but I'm currently unable to add the include feature due to lack of 
+            # understanding how JSONAPI::Serializer works in conjunction with my models
             assessment = @player.assessments.create!(
                 rating: 9,
                 user_id: @user.id,
