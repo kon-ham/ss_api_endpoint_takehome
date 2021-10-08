@@ -1,6 +1,8 @@
 # ss_api_endpoint_takehome
 ## About this Project
-Take-home challenge for SS. Create tables, model validations, and endpoints for an API only app. Authenticate w/ JWT. Create documentation for API endpoints. Answer technical questions. Reflect on JSON Web Token usage. Demonstrate project management. And most importantly, have a great time learning! 
+Take-home challenge for SS. Create tables, model validations, and endpoints for an API only app. Authenticate w/ JWT. Create documentation for API endpoints. Answer technical questions. Reflect on JSON Web Token usage. Demonstrate project management. 
+
+And most importantly, have a great time learning! 
 
 Thank you to SS for the opportunity!
 ## Table of Contents
