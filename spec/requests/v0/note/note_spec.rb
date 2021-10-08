@@ -29,7 +29,22 @@ RSpec.describe 'Players' do
             }
             post '/api/v0/notes', headers: @headers, params: body
 
+            json_response = JSON.parse(response.body, symbolize_names: true)
+
             expect(response).to be_successful
+            expect(response.status).to eq(200)
+            expect(json_response.count).to eq(1)
+            expect(json_response).to have_key(:data)
+            expect(json_response[:data].count).to eq(3)
+            expect(json_response[:data]).to have_key(:id)
+            expect(json_response[:data]).to have_key(:type)
+            expect(json_response[:data]).to have_key(:id)
+            expect(json_response[:data][:attributes].count).to eq(5)
+            expect(json_response[:data][:attributes]).to have_key(:note)
+            expect(json_response[:data][:attributes]).to have_key(:user_id)
+            expect(json_response[:data][:attributes]).to have_key(:assessment_id)
+            expect(json_response[:data][:attributes]).to have_key(:created_at)
+            expect(json_response[:data][:attributes]).to have_key(:updated_at)
         end
     end
 end
