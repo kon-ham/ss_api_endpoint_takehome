@@ -24,7 +24,7 @@ RSpec.describe 'Assessments' do
                         }
                     ]
                 },
-            "include": nil
+            "include": "notes"
             }
     end
 
@@ -97,7 +97,7 @@ RSpec.describe 'Assessments' do
                 tournament_id: @tournament.id,
                 player_id: @player.id
             )
-            get "/api/v0/assessments/#{assessment.id}", headers: @headers, params: { include: nil }
+            get "/api/v0/assessments/#{assessment.id}", headers: @headers, params: { include: "notes" }
             json_response = JSON.parse(response.body, symbolize_names: true)
             
             expect(response).to be_successful
@@ -148,7 +148,7 @@ RSpec.describe 'Assessments' do
         end
     end
 
-    describe 'Happy Path - DELETE /assessment/{:id}' do
+    describe 'Happy Path - DELETE /assessment/{:assessment_id}' do
         it 'can reach the /assessments/{:id} endpoint and delete assessment' do
             assessment = @user.assessments.create(
                 rating: 5,
@@ -159,6 +159,14 @@ RSpec.describe 'Assessments' do
             json_response = JSON.parse(response.body, symbolize_names: true)
 
             expect(json_response[:data][:message]).to eq("assessment and notes deleted")
+        end
+    end
+
+    describe 'Sad Path - DELETE /assessment/{:assessment_id}' do
+        it "can return an error message when attempting to delete an assessment that doesn't exist" do
+            delete "/api/v0/assessments/9000", headers: @headers
+
+            expect(response.body).to eq("Assessment not found")
         end
     end
 end

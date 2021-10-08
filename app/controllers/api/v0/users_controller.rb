@@ -8,14 +8,4 @@ class Api::V0::UsersController < ApplicationController
             render json: { error: "Invalid user credentials" }, status: :unauthorized
         end
     end
-
-    def auto_login
-        render json: @user
-    end
-
-    private
-
-    def user_params
-        params.permit(:email, :password)
-    end
 end
