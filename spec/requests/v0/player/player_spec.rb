@@ -23,6 +23,20 @@ RSpec.describe 'Players' do
 
             expect(response).to be_successful
             expect(response.status).to eq(200)
+            expect(json_response).to have_key(:data)
+            expect(json_response[:data].last.count).to eq(3)
+            expect(json_response[:data].last).to have_key(:id)
+            expect(json_response[:data].last).to have_key(:type)
+            expect(json_response[:data].last).to have_key(:attributes)
+            expect(json_response[:data].last[:attributes].count).to eq(8)
+            expect(json_response[:data].last[:attributes]).to have_key(:first_name)
+            expect(json_response[:data].last[:attributes]).to have_key(:last_name)
+            expect(json_response[:data].last[:attributes]).to have_key(:height)
+            expect(json_response[:data].last[:attributes]).to have_key(:weight)
+            expect(json_response[:data].last[:attributes]).to have_key(:birthday)
+            expect(json_response[:data].last[:attributes]).to have_key(:graduation_year)
+            expect(json_response[:data].last[:attributes]).to have_key(:position)
+            expect(json_response[:data].last[:attributes]).to have_key(:recruit)
         end
     end
 end
