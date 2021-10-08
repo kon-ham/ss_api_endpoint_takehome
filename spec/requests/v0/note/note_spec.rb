@@ -96,7 +96,7 @@ RSpec.describe 'Notes' do
             expect(json_response[:data][:attributes].count).to eq(5)
             expect(json_response[:data][:attributes]).to have_key(:note)
 
-            # data has changed for this note
+            # data change is reflected
             expect(json_response[:data][:attributes][:note]).to eq("Gryffindor Seeker. The Boy Who Lived")
             expect(json_response[:data][:attributes]).to have_key(:user_id)
             expect(json_response[:data][:attributes]).to have_key(:assessment_id)
@@ -136,6 +136,18 @@ RSpec.describe 'Notes' do
 
             # now testing that we have zero notes
             expect(@assessment.notes.all.count).to eq(0)
+        end
+    end
+
+    describe 'Sad Path - DELETE /notes/{:note_id}' do
+        it 'can return an error message when deleting a note that does not exist' do
+            delete '/api/v0/notes/9000', headers: @headers
+
+            json_response = JSON.parse(response.body, symbolize_names: true)
+
+            expect(response).to_not be_successful
+            expect(response.code).to eq("404")
+            expect(json_response[:message]).to eq("Note not found")
         end
     end
 end

@@ -35,13 +35,16 @@ RSpec.describe 'Assessments' do
 
             expect(response).to be_successful
             expect(response.status).to eq(200)
+
             expect(json_response).to have_key(:data)
             expect(json_response).to have_key(:included)
+
             expect(json_response[:data].keys.count).to eq(4)
             expect(json_response[:data]).to have_key(:id)
             expect(json_response[:data]).to have_key(:type)
             expect(json_response[:data]).to have_key(:attributes)
             expect(json_response[:data]).to have_key(:relationships)
+
             expect(json_response[:data][:attributes].keys.count).to eq(7)
             expect(json_response[:data][:attributes]).to have_key(:rating)
             expect(json_response[:data][:attributes]).to have_key(:user_id)
@@ -72,13 +75,16 @@ RSpec.describe 'Assessments' do
 
             expect(response).to be_successful
             expect(response.status).to eq(200)
+
             expect(json_response).to have_key(:data)
             expect(json_response).to_not have_key(:included)
+
             expect(json_response[:data].keys.count).to eq(4)
             expect(json_response[:data]).to have_key(:id)
             expect(json_response[:data]).to have_key(:type)
             expect(json_response[:data]).to have_key(:attributes)
             expect(json_response[:data]).to have_key(:relationships)
+
             expect(json_response[:data][:attributes].keys.count).to eq(7)
             expect(json_response[:data][:attributes]).to have_key(:rating)
             expect(json_response[:data][:attributes]).to have_key(:user_id)
@@ -102,13 +108,16 @@ RSpec.describe 'Assessments' do
             
             expect(response).to be_successful
             expect(response.status).to eq(200)
+
             expect(json_response).to have_key(:data)
             expect(json_response).to have_key(:included)
+
             expect(json_response[:data].keys.count).to eq(4)
             expect(json_response[:data]).to have_key(:id)
             expect(json_response[:data]).to have_key(:type)
             expect(json_response[:data]).to have_key(:attributes)
             expect(json_response[:data]).to have_key(:relationships)
+
             expect(json_response[:data][:attributes].keys.count).to eq(7)
             expect(json_response[:data][:attributes]).to have_key(:rating)
             expect(json_response[:data][:attributes]).to have_key(:user_id)
@@ -130,13 +139,16 @@ RSpec.describe 'Assessments' do
 
             expect(response).to be_successful
             expect(response.status).to eq(200)
+
             expect(json_response).to have_key(:data)
             expect(json_response).to_not have_key(:included)
+
             expect(json_response[:data].keys.count).to eq(4)
             expect(json_response[:data]).to have_key(:id)
             expect(json_response[:data]).to have_key(:type)
             expect(json_response[:data]).to have_key(:attributes)
             expect(json_response[:data]).to have_key(:relationships)
+            
             expect(json_response[:data][:attributes].keys.count).to eq(7)
             expect(json_response[:data][:attributes]).to have_key(:rating)
             expect(json_response[:data][:attributes]).to have_key(:user_id)
