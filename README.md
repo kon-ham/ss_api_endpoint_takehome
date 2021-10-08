@@ -18,7 +18,7 @@ To run the web application on your local machine, you can fork and clone down th
 ### Prerequisites
 To run this application you will need `Ruby 2.7.2` and `Rails 5.2.6` 
 
-(This was supposed to be in `Rails 6.0.2` but I made a mistake! Super sorry about that. 
+(This was supposed to be in `Rails 6.0.2` but I made a mistake! Super sorry about that.)
 ### Installing
 First you'll need to:
 1) `bundle install` 
