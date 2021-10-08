@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post "/login", to: "users#login"
       get "auto_login", to: "users#auto_login"
 
+      resources :teams, only: [:show]
       resources :notes, only: [:create, :update, :destroy]
       resources :assessments, only: [:show, :create, :destroy]
       resources :players, only: [:index, :show] do

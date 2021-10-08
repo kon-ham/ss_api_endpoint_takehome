@@ -40,7 +40,7 @@ class Api::V0::AssessmentsController < ApplicationController
 
     # I think creating strong params is good practice, but I had some trouble visualizing
     # my tests in conjunction to strong params, so I decided to leave it out until I 
-    # feel I could explain and understand it better
+    # feel I could explain and understand it better. This would be great for a future iteration!
 
     # private
     # def assessment_params
