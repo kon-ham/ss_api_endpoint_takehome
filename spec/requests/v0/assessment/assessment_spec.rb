@@ -12,20 +12,20 @@ RSpec.describe 'Assessments' do
             'Authorization': json_object[:auth_token]
         }
         @body = {
-            "type": "assessments",
-            "attributes": {
-                "rating": 5,
-                "player_id": @player.id,
-                "tournament_id": @tournament.id,
-                "assessment_type": "tournament",
-                    "assessment_notes_attributes": [
-                        {
-                            "note": "assessment one text"
-                        }
-                    ]
-                },
-            "include": "notes"
-            }
+        "type": "assessments",
+        "attributes": {
+            "rating": 5,
+            "player_id": @player.id,
+            "tournament_id": @tournament.id,
+            "assessment_type": "tournament",
+                "assessment_notes_attributes": [
+                    {
+                        "note": "assessment one text"
+                    }
+                ]
+            },
+        "include": "notes"
+        }
     end
 
     describe 'Happy Path - POST /assessments' do

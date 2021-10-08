@@ -1,6 +1,6 @@
 require 'rails_helper' 
 
-RSpec.describe 'Players' do
+RSpec.describe 'Notes' do
     before :each do
         @user = User.create!(email: 'harrypotter@hogwarts.edu', password: "wingardiumleviosa")
         post '/api/v0/login', params: { email: @user.email, password: @user.password }
